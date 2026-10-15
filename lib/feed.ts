@@ -1,0 +1,17 @@
+import { XMLParser, XMLValidator } from 'fast-xml-parser';
+export interface FeedItem { title:string; url:string; description:string; publishedAt:string; }
+export function plainText(value:unknown):string { return String(value??'').replace(/<!--[\s\S]*?-->/g,'').replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,'').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi,'').replace(/<[^>]*>/g,' ').replace(/&nbsp;|&#160;/g,' ').replace(/&amp;/g,'&').replace(/&quot;/g,'"').replace(/&#39;|&apos;/g,"'").replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\s+/g,' ').trim(); }
+export function safeUrl(value:string,hosts:string[]):string|null { try { const u=new URL(value); if(u.protocol!=='https:'||u.port||u.username||u.password||!hosts.includes(u.hostname))return null; u.hash=''; for(const key of [...u.searchParams.keys()]) if(key.startsWith('utm_'))u.searchParams.delete(key); return u.href;}catch{return null;} }
+export function parseFeed(xml:string,hosts:string[],now=new Date()):FeedItem[]{
+ if(xml.length>1500000||/<!DOCTYPE|<!ENTITY/i.test(xml)||XMLValidator.validate(xml)!==true)throw new Error('Invalid or unsafe XML');
+ const parsed=new XMLParser({ignoreAttributes:false,processEntities:true}).parse(xml); const items=parsed.rss?.channel?.item ?? parsed.feed?.entry;
+ if(!items)throw new Error('No supported feed items');
+ return (Array.isArray(items)?items:[items]).slice(0,30).flatMap((item:{link?:string|Record<string,string>;title?:unknown;pubDate?:string;published?:string;updated?:string;description?:unknown;summary?:unknown})=>{const rawLink=typeof item.link==='string'?item.link:item.link?.['@_href'];const url=safeUrl(rawLink??'',hosts);const title=plainText(item.title);const date=new Date(item.pubDate??item.published??item.updated??''); if(!url||!title||!Number.isFinite(date.getTime())||date.getTime()>now.getTime()+300000)return []; return [{title,url,description:plainText(item.description??item.summary),publishedAt:date.toISOString()}];});
+}
+export async function safeFetch(url:string,hosts:string[],accept='application/rss+xml, application/xml, text/xml, text/html, application/json'):Promise<string>{
+ if(!safeUrl(url,hosts))throw new Error('Source URL is not permitted');
+ for(let attempt=0;attempt<2;attempt++){
+  try{const res=await fetch(url,{redirect:'manual',signal:AbortSignal.timeout(12000),headers:{'User-Agent':'FinanceDesk/1.0 personal research reader','Accept':accept}}); if(res.status>=300&&res.status<400)throw new Error('Source redirect rejected');if(!res.ok)throw new Error(`Source returned HTTP ${res.status}`); if(Number(res.headers.get('content-length'))>1500000)throw new Error('Source exceeds size limit'); const reader=res.body?.getReader();if(!reader)throw new Error('Empty source body');const chunks:Uint8Array[]=[];let size=0;for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1500000){await reader.cancel();throw new Error('Source exceeds size limit');}chunks.push(value);}const merged=new Uint8Array(size);let offset=0;for(const chunk of chunks){merged.set(chunk,offset);offset+=chunk.length;}return new TextDecoder().decode(merged); }catch(e){if(attempt===1)throw e; await new Promise(r=>setTimeout(r,250));}
+ }throw new Error('Source unavailable');
+}
+export function extractParagraphs(html:string):string[]{return [...html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)].map(m=>plainText(m[1])).filter(p=>p.length>70&&!/For release at|For media inquiries|Subscribe|All rights reserved|cookies|JavaScript|email address/i.test(p));}

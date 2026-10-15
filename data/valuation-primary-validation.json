@@ -1,0 +1,136 @@
+{
+  "MSFT": {
+    "status": "verified",
+    "fiscalPeriodEnd": "2026-06-30",
+    "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+    "checkedAt": "2026-10-08T23:26:35.979885Z",
+    "note": "Reported inputs reconciled against Microsoft FY2026 results released 29 July 2026; model proxies remain. Shares match the rounded fiscal-year-end reported count. The provider closing price is not part of the filing cross-check.",
+    "expected": {
+      "ebit": 155237000000,
+      "da": 38534000000,
+      "capex": 115948000000,
+      "changeNwc": 3020000000,
+      "cash": 20935000000,
+      "debt": 40294000000
+    },
+    "primaryInputs": {
+      "da": {
+        "value": 38534000000,
+        "field": "Depreciation, amortisation and other (reported proxy)",
+        "period": "2026-06-30",
+        "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+        "reason": "Issuer annual cash-flow statement reports USD38,534m; other is not separately quantified.",
+        "retrievedAt": "2026-10-08T23:26:35.979885Z"
+      },
+      "changeNwc": {
+        "value": 3020000000,
+        "field": "Operating-capital cash use including noncurrent items (reported proxy)",
+        "period": "2026-06-30",
+        "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast",
+        "reason": "Operating asset/liability cash-flow movements sum to -4,895m including income taxes -1,875m; excluding tax gives -3,020m cash flow, or +3,020m reinvestment.",
+        "retrievedAt": "2026-10-08T23:26:35.979885Z"
+      }
+    },
+    "limitations": [
+      "D&A includes an unseparated other component in the issuer report and is an approximate non-cash add-back.",
+      "Operating-capital reinvestment includes noncurrent operating assets and liabilities. The income-tax movement is excluded because tax is modelled separately.",
+      "The equity bridge adds cash and equivalents only; it excludes short-term investments and other non-operating assets.",
+      "Borrowings exclude operating lease liabilities because the unadjusted operating-profit proxy includes lease costs.",
+      "A single year of elevated capital spending is projected mechanically; this is not a normalised business forecast or an investment recommendation.",
+      "The share count is the rounded fiscal-year-end count, not a current fully diluted share forecast."
+    ],
+    "expectedShares": {
+      "value": 7427000000,
+      "asOf": "2026-06-30"
+    }
+  },
+  "PG": {
+    "status": "verified",
+    "fiscalPeriodEnd": "2026-06-30",
+    "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+    "checkedAt": "2026-10-08T23:27:53.092438Z",
+    "note": "FY2026 operating and balance-sheet amounts reconciled to the issuer results and SEC annual financial statements. Working-capital and non-debt claims remain simplified model proxies; shares and closing price are separate provider observations.",
+    "expected": {
+      "ebit": 19748000000,
+      "da": 3160000000,
+      "capex": 4409000000,
+      "changeNwc": -362000000,
+      "cash": 9942000000,
+      "debt": 34138000000
+    },
+    "primaryInputs": {
+      "changeNwc": {
+        "value": -362000000,
+        "field": "Trade operating-capital cash use (partial proxy)",
+        "period": "2026-06-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+        "reason": "Cash-flow receivables +84m, inventories -641m and payables +919m sum to +362m cash generation; invert to -362m reinvestment. Other accruals omitted.",
+        "retrievedAt": "2026-10-08T23:27:53.092438Z"
+      },
+      "debt": {
+        "value": 34138000000,
+        "field": "Borrowings: primary current debt plus long-term debt",
+        "period": "2026-06-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+        "reason": "Displayed current debt11,296m plus long-term22,842m; replace provider34,139m because independently rounded current-debt components sum1m above displayed subtotal.",
+        "retrievedAt": "2026-10-08T23:27:53.092438Z"
+      },
+      "da": {
+        "value": 3160000000,
+        "field": "Depreciation and amortisation",
+        "period": "2026-06-30",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/pg-20260630.htm",
+        "reason": "Separately reported D&A matches provider; no MSFT-style other component in this row.",
+        "retrievedAt": "2026-10-08T23:27:53.092438Z"
+      }
+    },
+    "limitations": [
+      "Operating-capital movement uses only receivables, inventories and payables; other accruals and operating balances are omitted.",
+      "The equity bridge omits preferred capital and noncontrolling claims, so the result is not a fully adjusted common-equity valuation.",
+      "Provider current debt sums rounded components to USD11,297m; the primary statement subtotal is USD11,296m. The model uses primary total borrowings USD34,138m.",
+      "Cash includes cash and equivalents only. A single annual operating period is projected mechanically using illustrative assumptions.",
+      "Shares and closing price are dated provider observations; they are not part of the annual operating-statement cross-check."
+    ]
+  },
+  "UPS": {
+    "status": "verified",
+    "fiscalPeriodEnd": "2025-12-31",
+    "url": "https://www.sec.gov/Archives/edgar/data/1090727/000162828026008432/ups-20251231.htm",
+    "checkedAt": "2026-10-08T23:30:54.222015Z",
+    "note": "FY2025 reported inputs reconciled against UPS annual financial statements. Operating-capital cash use excludes tax movement; pensions, restructuring and lease reinvestment remain simplified. Shares and price are separate dated provider observations.",
+    "expected": {
+      "ebit": 7867000000,
+      "da": 3746000000,
+      "capex": 3685000000,
+      "changeNwc": 667000000,
+      "cash": 5887000000,
+      "debt": 24127000000
+    },
+    "primaryInputs": {
+      "da": {
+        "value": 3746000000,
+        "field": "Depreciation and amortisation",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1090727/000162828026008432/ups-20251231.htm",
+        "reason": "Separately reported annual D&A matches provider.",
+        "retrievedAt": "2026-10-08T23:30:54.222015Z"
+      },
+      "changeNwc": {
+        "value": 667000000,
+        "field": "Operating-capital cash use excluding income-tax movement",
+        "period": "2025-12-31",
+        "url": "https://www.sec.gov/Archives/edgar/data/1090727/000162828026008432/ups-20251231.htm",
+        "reason": "Provider cash movement -997m includes -330m income-tax receivables/payables. Primary working capital and other noncurrent assets/liabilities movement is -667m; invert to +667m reinvestment.",
+        "retrievedAt": "2026-10-08T23:30:54.222015Z"
+      }
+    },
+    "limitations": [
+      "Operating-capital cash use includes noncurrent operating assets and liabilities; income-tax movement is excluded because tax is modelled separately.",
+      "Pension and postretirement funding, restructuring costs and asset disposals are not normalised. This simplified model is not a full pension-adjusted valuation.",
+      "Debt includes finance leases, while cash capital expenditures exclude noncash finance-lease additions; future lease reinvestment is not separately modelled.",
+      "Receivables factoring benefited reported cash flow; no adjustment reverses that effect.",
+      "Cash-only equity bridge omits other non-operating assets and claims. Annual results are projected mechanically using illustrative assumptions.",
+      "Shares and closing price are dated provider observations and are not covered by the annual financial-input cross-check."
+    ]
+  }
+}

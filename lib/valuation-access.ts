@@ -1,0 +1,2 @@
+import {accessAllowed} from './access';
+export function valuationImportAccess(request:Request,env:Record<string,unknown>):{status:number;error:string}|null {if(!accessAllowed(request.url,env))return {status:401,error:'Private access required'};if(request.headers.get('sec-fetch-site')==='cross-site')return {status:403,error:'Cross-site import denied'};if(env.VALUATIONS_PROVIDER_STORAGE_VERIFIED!=='true')return {status:503,error:'Provider storage rights have not been activated'};return null;}
