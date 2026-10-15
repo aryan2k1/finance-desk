@@ -44,7 +44,7 @@ Use the loopback URL printed by the development server. Empty or unavailable vie
 
 ## Validation
 
-With Node.js 24+, run `npx --yes --package=tsx tsx --test tests/*.test.ts`. The collector tests require Python with pandas installed: `python3 -m pip install pandas`, then `python3 tests/valuation-collector.test.py`. Source mapping metadata records earlier reviews; it is not a claim that market data is current.
+With Node.js 24+, run `npx --yes --package=tsx tsx --test tests/*.test.ts`. The collector tests require Python with the pinned collector dependency installed: `python3 -m pip install defeatbeta-api==0.0.62`, then `python3 tests/valuation-collector.test.py`. Source mapping metadata records earlier reviews; it is not a claim that market data is current.
 
 ## Boundaries
 
